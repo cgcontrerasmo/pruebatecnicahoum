@@ -26,6 +26,7 @@ const Search = ({ setSearchWord }) => {
       </Button>
       <Button variant="outline-success" className="mx-2">
         <BsFilterRight />
+        <p>filtrar</p>
       </Button>
     </Form>
   );

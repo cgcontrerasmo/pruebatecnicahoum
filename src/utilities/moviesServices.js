@@ -22,7 +22,6 @@ export const getTopScore = (setterMovies, page, setterLoading, setterPages) => {
       if (res.status === 200) {
         setterMovies(res.data.results);
         setterPages(res.data.total_pages);
-        console.log(res.data);
         setterLoading(false);
       }
     })
@@ -46,7 +45,6 @@ export const getMovieDetails = (setterDetails, movieId, setterLoading) => {
     .get(`${BASE_URL}${movieId}?api_key=${API_KEY}`)
     .then((res) => {
       if (res.status === 200) {
-        console.log("MovieDetails", res);
         setterDetails(res.data);
         setterLoading(false);
       }
@@ -76,18 +74,20 @@ export const getMoviesSearch = (
   setterLoading,
   setterPages,
   searcher,
-  adult,
-  language
+  filters
 ) => {
+  let query = "&query=a";
+  if (searcher !== "") {
+    query = `&query=${searcher}`;
+  }
   axios
     .get(
-      `${BASE_URL_SEARCH}?api_key=${API_KEY}&page=${page}&query=${searcher}&include_adult=${adult}&language=${language}`
+      `${BASE_URL_SEARCH}?api_key=${API_KEY}&page=${page}${query}${filters.language}${filters.region}&include_adult=${filters.include_adult}`
     )
     .then((res) => {
       if (res.status === 200) {
         setterMovies(res.data.results);
         setterPages(res.data.total_pages);
-        console.log(res.data);
         setterLoading(false);
       }
     })

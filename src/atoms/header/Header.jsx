@@ -6,12 +6,11 @@ import {
   Navbar,
   Button,
 } from "react-bootstrap";
-import BasicLayout from "../../templates/basicLayout/BacisLayout";
 import { Link } from "react-scroll";
 import { useState } from "react";
 import { BsFilterRight } from "react-icons/bs";
 
-const Header = ({ type, setSearchWord }) => {
+const Header = ({ type, setSearchWord, setShowFilters }) => {
   const [auxSearchWord, setAuxSearchWord] = useState("");
   return (
     <Navbar collapseOnSelect expand="lg">
@@ -55,8 +54,19 @@ const Header = ({ type, setSearchWord }) => {
               >
                 Buscar
               </Button>
-              <Button variant="outline-success" className="mx-2">
-                <BsFilterRight />
+              <Button
+                variant="outline-success"
+                className="mx-2"
+                onClick={() => {
+                  setShowFilters(true);
+                }}
+              >
+                <div className="d-flex align-items-center">
+                  <BsFilterRight />
+                  <div>
+                    <p className="mx-2 my-0">filtrar</p>
+                  </div>
+                </div>
               </Button>
             </Form>
           )}

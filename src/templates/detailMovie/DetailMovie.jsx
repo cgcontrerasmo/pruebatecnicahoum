@@ -1,7 +1,6 @@
 import { Col, Container, Image, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Header from "../../atoms/header/Header";
-import BasicLayout from "../basicLayout/BacisLayout";
 import "./DetailMovie.scss";
 import { useEffect, useState } from "react";
 import { getMovieDetails } from "../../utilities/moviesServices";
@@ -13,15 +12,9 @@ const DetailMovie = () => {
   const { id } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [pages, setPages] = useState(10);
 
   useEffect(() => {
     getMovieDetails(setMovieDetails, id, setLoading);
-  }, [id]);
-
-  useEffect(() => {
-    console.log(movieDetails);
   }, [id]);
 
   return (
@@ -49,9 +42,14 @@ const DetailMovie = () => {
         </Col>
       </Row>
       <Row>
-        <Image src={`${imageRoute}${movieDetails.backdrop_path}`} />
+        <Image
+          src={`${imageRoute}${movieDetails.backdrop_path}`}
+          alt={movieDetails.original_title}
+        />
       </Row>
-      <Row>{movieDetails.overview}</Row>
+      <Row>
+        <p>{movieDetails.overview}</p>
+      </Row>
       <Row>
         <Col className="col-sm-1">Categorías:</Col>
         <Col>
@@ -72,7 +70,10 @@ const DetailMovie = () => {
               <Row>{company.name}</Row>
               <Row>
                 {company.logo_path !== null && (
-                  <Image src={`${imageRoute}${company.logo_path}`} />
+                  <Image
+                    src={`${imageRoute}${company.logo_path}`}
+                    alt={company.name}
+                  />
                 )}
               </Row>
             </Col>

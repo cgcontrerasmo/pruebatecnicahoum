@@ -1,5 +1,4 @@
 import { Col, Container, Image, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import "./CardMovie.scss";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +15,10 @@ const CardMovie = ({ movie, type }) => {
       }}
     >
       <Row>
-        <Image src={`${imageRoute}${movie.poster_path}`} />
+        <Image
+          src={`${imageRoute}${movie.poster_path}`}
+          alt={movie.original_title}
+        />
       </Row>
       {type === "principal" && (
         <Row className="mx-1">

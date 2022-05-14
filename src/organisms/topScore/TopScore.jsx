@@ -1,13 +1,12 @@
-import { Carousel } from "bootstrap";
 import { useEffect, useState } from "react";
-import { Col, Container, Pagination, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import CardMovie from "../../atoms/cardMovie/CardMovie";
 import MyPagination from "../../atoms/pagination/MyPagination";
 import BasicLayout from "../../templates/basicLayout/BacisLayout";
 import { getTopScore, getMoviesSearch } from "../../utilities/moviesServices";
 import "./TopScore.scss";
 
-const TopScore = ({ searchWord }) => {
+const TopScore = ({ searchWord, filters }) => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -15,15 +14,18 @@ const TopScore = ({ searchWord }) => {
 
   useEffect(() => {
     if (searchWord !== "") {
-      getMoviesSearch(setMovies, page, setLoading, setPages, searchWord);
+      getMoviesSearch(
+        setMovies,
+        page,
+        setLoading,
+        setPages,
+        searchWord,
+        filters
+      );
     } else {
       getTopScore(setMovies, page, setLoading, setPages);
     }
-  }, [page, searchWord]);
-
-  useEffect(() => {
-    console.log(page);
-  }, [page]);
+  }, [page, searchWord, filters]);
 
   return (
     <BasicLayout>

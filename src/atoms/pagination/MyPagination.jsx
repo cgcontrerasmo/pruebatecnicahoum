@@ -26,7 +26,7 @@ const MyPagination = ({ setterPage, pages, page }) => {
       );
     }
     setItems(auxItems);
-  }, [page]);
+  }, [page, pages]);
 
   return (
     <Pagination>
