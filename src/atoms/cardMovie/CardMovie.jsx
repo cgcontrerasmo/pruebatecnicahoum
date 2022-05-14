@@ -1,18 +1,18 @@
 import { Col, Container, Image, Row } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./CardMovie.scss";
+import { useNavigate } from "react-router-dom";
 
 const CardMovie = ({ movie, type }) => {
   const imageRoute = "https://image.tmdb.org/t/p/w500";
-  const history = useHistory();
+  const navigate = useNavigate();
   return (
     <Container
       key={movie.id}
       className="CardMovie mx-0 px-0 my-2"
       fluid
       onClick={() => {
-        history.push(`detail/${movie.id}`);
+        navigate(`../detail/${movie.id}`);
       }}
     >
       <Row>

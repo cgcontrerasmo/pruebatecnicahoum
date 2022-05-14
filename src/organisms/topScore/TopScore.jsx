@@ -4,18 +4,22 @@ import { Col, Container, Pagination, Row } from "react-bootstrap";
 import CardMovie from "../../atoms/cardMovie/CardMovie";
 import MyPagination from "../../atoms/pagination/MyPagination";
 import BasicLayout from "../../templates/basicLayout/BacisLayout";
-import { getTopScore } from "../../utilities/moviesServices";
+import { getTopScore, getMoviesSearch } from "../../utilities/moviesServices";
 import "./TopScore.scss";
 
-const TopScore = () => {
+const TopScore = ({ searchWord }) => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(10);
 
   useEffect(() => {
-    getTopScore(setMovies, page, setLoading, setPages);
-  }, [page]);
+    if (searchWord !== "") {
+      getMoviesSearch(setMovies, page, setLoading, setPages, searchWord);
+    } else {
+      getTopScore(setMovies, page, setLoading, setPages);
+    }
+  }, [page, searchWord]);
 
   useEffect(() => {
     console.log(page);

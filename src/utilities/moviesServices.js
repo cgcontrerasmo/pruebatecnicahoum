@@ -1,6 +1,7 @@
 import axios from "axios";
 const BASE_URL = "https://api.themoviedb.org/3/movie/";
 const API_KEY = "048606db50f52287d36a510eab6b20ca";
+const BASE_URL_SEARCH = "https://api.themoviedb.org/3/search/movie";
 
 export const getPopularMovies = (setterMovies, page, setterLoading) => {
   axios
@@ -67,4 +68,28 @@ export const getSimilarMovies = (
         setterLoading(false);
       }
     });
+};
+
+export const getMoviesSearch = (
+  setterMovies,
+  page,
+  setterLoading,
+  setterPages,
+  searcher,
+  adult,
+  language
+) => {
+  axios
+    .get(
+      `${BASE_URL_SEARCH}?api_key=${API_KEY}&page=${page}&query=${searcher}&include_adult=${adult}&language=${language}`
+    )
+    .then((res) => {
+      if (res.status === 200) {
+        setterMovies(res.data.results);
+        setterPages(res.data.total_pages);
+        console.log(res.data);
+        setterLoading(false);
+      }
+    })
+    .catch((error) => {});
 };

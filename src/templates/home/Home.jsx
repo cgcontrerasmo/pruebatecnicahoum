@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import "./Home.scss";
 
 const Home = () => {
-  const [searchWord, setSearhWord] = useState("");
+  const [searchWord, setSearchWord] = useState("");
 
   useEffect(() => {
     console.log(searchWord);
@@ -15,17 +15,13 @@ const Home = () => {
   return (
     <Container>
       <Row>
-        <Header
-          type="home"
-          searchWord={searchWord}
-          setSearhWord={setSearhWord}
-        />
+        <Header type="home" setSearchWord={setSearchWord} />
       </Row>
       <Row>
-        <Search />
+        <Search setSearchWord={setSearchWord} />
       </Row>
       <Row>
-        <TopScore />
+        <TopScore searchWord={searchWord} />
       </Row>
     </Container>
   );
