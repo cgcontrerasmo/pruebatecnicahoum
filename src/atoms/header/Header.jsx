@@ -12,23 +12,18 @@ import { BsFilterRight } from "react-icons/bs";
 import "./Header.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { changeFilters } from "../../store/filters/actions";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ type, setShowFilters }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const filters = useSelector((state) => state.filters);
 
-  useEffect(() => {
-    console.log(filters);
-  }, [filters]);
-
-  const [auxSearchWord, setAuxSearchWord] = useState(
-    filters.filters?.searchWord
-  );
+  const [auxSearchWord, setAuxSearchWord] = useState("");
 
   const handleChangeFilters = () => {
     const auxFilters = { ...filters.filters };
     auxFilters.searchWord = auxSearchWord;
-    console.log("AuxFiltersHeader", auxFilters);
     dispatch(changeFilters({ filters: auxFilters }));
   };
 
@@ -37,12 +32,21 @@ const Header = ({ type, setShowFilters }) => {
     setShowFilters(true);
   };
 
+  useEffect(() => {
+    setAuxSearchWord(filters.filters.searchWord);
+  }, [filters]);
+
   return (
-    <Navbar collapseOnSelect expand="lg">
+    <Navbar collapseOnSelect expand="lg" className="Header">
       <Container fluid={true} className="px-0 px-md-2">
-        <Navbar.Brand href="/">
+        <Navbar
+          className="Header__ApplicationName"
+          onClick={() => {
+            navigate("../");
+          }}
+        >
           <h1>Tecnical Movie</h1>
-        </Navbar.Brand>
+        </Navbar>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse
           id="responsive-navbar-nav"

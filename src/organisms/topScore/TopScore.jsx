@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import CardMovie from "../../atoms/cardMovie/CardMovie";
+import ModalLoading from "../../atoms/modalLoading/ModalLoading";
 import MyPagination from "../../atoms/pagination/MyPagination";
+import ShowFiltersApply from "../../molecules/showFiltersApply/ShowFiltersApply";
 import BasicLayout from "../../templates/basicLayout/BacisLayout";
 import { getTopScore, getMoviesSearch } from "../../utilities/moviesServices";
 import "./TopScore.scss";
@@ -24,29 +26,36 @@ const TopScore = () => {
   }, [page, filters]);
 
   return (
-    <BasicLayout>
-      <Container>
-        <Row>
-          <Col className="d-flex md-12 d-lg-none justify-content-center">
-            <MyPagination setterPage={setPage} pages={pages} page={page} />
-          </Col>
-        </Row>
-        <Row>
-          {movies.map((movie) => {
-            return (
-              <Col className="col-12 col-md-4 col-lg-3" key={movie.id}>
-                <CardMovie movie={movie} type="principal" />
+    <>
+      {loading ? (
+        <ModalLoading showModal={loading} />
+      ) : (
+        <BasicLayout>
+          <Container>
+            {filters.filters.searchWord !== "" && <ShowFiltersApply />}
+            <Row>
+              <Col className="d-flex md-12 d-lg-none justify-content-center">
+                <MyPagination setterPage={setPage} pages={pages} page={page} />
               </Col>
-            );
-          })}
-        </Row>
-        <Row>
-          <Col className="md-12 d-flex justify-content-center">
-            <MyPagination setterPage={setPage} pages={pages} page={page} />
-          </Col>
-        </Row>
-      </Container>
-    </BasicLayout>
+            </Row>
+            <Row>
+              {movies.map((movie) => {
+                return (
+                  <Col className="col-12 col-md-4 col-lg-3" key={movie.id}>
+                    <CardMovie movie={movie} type="principal" />
+                  </Col>
+                );
+              })}
+            </Row>
+            <Row>
+              <Col className="md-12 d-flex justify-content-center">
+                <MyPagination setterPage={setPage} pages={pages} page={page} />
+              </Col>
+            </Row>
+          </Container>
+        </BasicLayout>
+      )}
+    </>
   );
 };
 

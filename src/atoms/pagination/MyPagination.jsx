@@ -10,7 +10,7 @@ const MyPagination = ({ setterPage, pages, page }) => {
     let begin = 1;
     const auxItems = [];
     if (parseInt(page) + 10 > pages) finish = pages;
-    else finish = parseInt(page) + 10;
+    else finish = parseInt(page) + 5;
     if (page > 5) begin = page - 4;
     for (let index = begin; index < finish; index++) {
       auxItems.push(

@@ -6,10 +6,9 @@ import "./SimilarMovies.scss";
 
 const SimilarMovies = ({ movieId }) => {
   const [similarMovies, setSimilarMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getSimilarMovies(setSimilarMovies, movieId, setLoading, 1);
+    getSimilarMovies(setSimilarMovies, movieId, 1);
   }, [movieId]);
 
   return (
