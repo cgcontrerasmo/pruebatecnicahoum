@@ -16,7 +16,7 @@ const MyPagination = ({ setterPage, pages, page }) => {
       auxItems.push(
         <Pagination.Item
           key={index}
-          active={index === page}
+          active={index === parseInt(page)}
           onClick={(e) => {
             setterPage(e.target.innerHTML);
           }}
@@ -29,11 +29,11 @@ const MyPagination = ({ setterPage, pages, page }) => {
   }, [page, pages]);
 
   return (
-    <Pagination>
+    <Pagination className="my-5">
       <Pagination.First onClick={() => setterPage(1)} />
-      {page > 10 && <Pagination.Ellipsis />}
+      {page > 10 && <Pagination.Ellipsis className="d-none d-md-flex" />}
       {items}
-      {pages > page + 5 && <Pagination.Ellipsis />}
+      {pages > page + 5 && <Pagination.Ellipsis className="d-none d-md-flex" />}
       <Pagination.Last onClick={() => setterPage(pages)} />
     </Pagination>
   );

@@ -17,7 +17,7 @@ const SimilarMovies = ({ movieId }) => {
       <Row className="d-flex justify-content-center">
         {similarMovies.map((similarMovie) => {
           return (
-            <Col className="col-1 mx-0 px-0">
+            <Col className="col-2 mx-2 px-0" key={similarMovie.id}>
               <CardMovie movie={similarMovie} />
             </Col>
           );

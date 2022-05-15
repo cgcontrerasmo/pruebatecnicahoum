@@ -62,7 +62,7 @@ export const getSimilarMovies = (
     .get(`${BASE_URL}${movieId}/similar?api_key=${API_KEY}&page=${page}`)
     .then((res) => {
       if (res.status === 200) {
-        setterSimilarMovies(res.data.results.slice(0, 10));
+        setterSimilarMovies(res.data.results.slice(0, 5));
         setterLoading(false);
       }
     });
@@ -73,19 +73,15 @@ export const getMoviesSearch = (
   page,
   setterLoading,
   setterPages,
-  searcher,
   filters
 ) => {
-  let query = "&query=a";
-  if (searcher !== "") {
-    query = `&query=${searcher}`;
-  }
   axios
     .get(
-      `${BASE_URL_SEARCH}?api_key=${API_KEY}&page=${page}${query}${filters.language}${filters.region}&include_adult=${filters.include_adult}`
+      `${BASE_URL_SEARCH}?api_key=${API_KEY}&page=${page}&query=${filters.searchWord}&language=${filters.language}&region=${filters.region}&include_adult=${filters.include_adult}`
     )
     .then((res) => {
       if (res.status === 200) {
+        console.log(res);
         setterMovies(res.data.results);
         setterPages(res.data.total_pages);
         setterLoading(false);

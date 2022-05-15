@@ -7,34 +7,19 @@ import "./Home.scss";
 import Filters from "../../molecules/filters/Filters";
 
 const Home = () => {
-  const [searchWord, setSearchWord] = useState("");
   const [showFilters, setShowFilters] = useState(false);
-  const [filters, setFilers] = useState({
-    region: "",
-    language: "",
-    include_adult: false,
-  });
 
   return (
     <Container>
-      <Filters
-        showModal={showFilters}
-        setShowModal={setShowFilters}
-        setFilers={setFilers}
-        filters={filters}
-      />
+      <Filters showModal={showFilters} setShowModal={setShowFilters} />
       <Row>
-        <Header
-          type="home"
-          setSearchWord={setSearchWord}
-          setShowFilters={setShowFilters}
-        />
+        <Header type="home" setShowFilters={setShowFilters} />
+      </Row>
+      <Row className="d-flex d-lg-none">
+        <Search setShowFilters={setShowFilters} />
       </Row>
       <Row>
-        <Search setSearchWord={setSearchWord} setShowFilters={setShowFilters} />
-      </Row>
-      <Row>
-        <TopScore searchWord={searchWord} filters={filters} />
+        <TopScore />
       </Row>
     </Container>
   );

@@ -1,27 +1,32 @@
 import Modal from "react-bootstrap/Modal";
 import { Row, Button, Form } from "react-bootstrap";
 import "./Filters.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { changeFilters } from "../../store/filters/actions";
 
-const Filters = ({ showModal, setShowModal, setFilers, filters }) => {
-  const [auxFiltersState, setAuxFiltersState] = useState(filters);
+const Filters = ({ showModal, setShowModal }) => {
+  const dispatch = useDispatch();
+  const filters = useSelector((state) => state.filters);
+  const [auxFiltersState, setAuxFiltersState] = useState({});
+
+  useEffect(() => {
+    setAuxFiltersState(filters.filters);
+  }, [filters]);
 
   const handleChangeFilters = (filter, value) => {
     const auxFilter = { ...auxFiltersState };
     auxFilter[filter] = value;
+    console.log("FILTERAUX", auxFilter);
     setAuxFiltersState(auxFilter);
   };
 
-  const handleAplyFilters = () => {
-    const auxFilterSend = { include_adult: auxFiltersState.include_adult };
+  useEffect(() => {
+    console.log("FiltersFilters", auxFiltersState);
+  }, [auxFiltersState]);
 
-    if (auxFiltersState.region !== "")
-      auxFilterSend.region = `&region=${auxFiltersState.region}`;
-
-    if (auxFiltersState.language !== "")
-      auxFilterSend.language = `&language=${auxFiltersState.language}`;
-
-    setFilers(auxFilterSend);
+  const handleApplyFilters = () => {
+    dispatch(changeFilters({ filters: auxFiltersState }));
     setShowModal(false);
   };
 
@@ -132,7 +137,11 @@ const Filters = ({ showModal, setShowModal, setFilers, filters }) => {
             value={auxFiltersState.region}
           >
             {ISO3166_1.map((country) => {
-              return <option value={country.iso2}>{country.name}</option>;
+              return (
+                <option key={country.iso2} value={country.iso2}>
+                  {country.name}
+                </option>
+              );
             })}
           </Form.Select>
         </Row>
@@ -145,7 +154,11 @@ const Filters = ({ showModal, setShowModal, setFilers, filters }) => {
             value={auxFiltersState.language}
           >
             {Language_codes.map((language) => {
-              return <option value={language.iso2}>{language.name}</option>;
+              return (
+                <option key={language.iso2} value={language.iso2}>
+                  {language.name}
+                </option>
+              );
             })}
           </Form.Select>
         </Row>
@@ -155,6 +168,7 @@ const Filters = ({ showModal, setShowModal, setFilers, filters }) => {
           variant="secondary"
           onClick={() => {
             setAuxFiltersState({
+              searchWord: "",
               region: "",
               language: "",
               include_adult: false,
@@ -163,7 +177,7 @@ const Filters = ({ showModal, setShowModal, setFilers, filters }) => {
         >
           Borrar
         </Button>
-        <Button variant="primary" onClick={handleAplyFilters}>
+        <Button variant="primary" onClick={handleApplyFilters}>
           Aplicar filtros
         </Button>
       </Modal.Footer>

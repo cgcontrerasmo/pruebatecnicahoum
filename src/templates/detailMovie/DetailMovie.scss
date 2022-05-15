@@ -1,0 +1,9 @@
+.DetailMovie {
+  &__containerImage {
+    height: 5rem;
+    &__image {
+      width: fit-content;
+      height: inherit;
+    }
+  }
+}

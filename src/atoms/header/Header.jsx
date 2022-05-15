@@ -7,14 +7,39 @@ import {
   Button,
 } from "react-bootstrap";
 import { Link } from "react-scroll";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsFilterRight } from "react-icons/bs";
+import "./Header.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { changeFilters } from "../../store/filters/actions";
 
-const Header = ({ type, setSearchWord, setShowFilters }) => {
-  const [auxSearchWord, setAuxSearchWord] = useState("");
+const Header = ({ type, setShowFilters }) => {
+  const dispatch = useDispatch();
+  const filters = useSelector((state) => state.filters);
+
+  useEffect(() => {
+    console.log(filters);
+  }, [filters]);
+
+  const [auxSearchWord, setAuxSearchWord] = useState(
+    filters.filters?.searchWord
+  );
+
+  const handleChangeFilters = () => {
+    const auxFilters = { ...filters.filters };
+    auxFilters.searchWord = auxSearchWord;
+    console.log("AuxFiltersHeader", auxFilters);
+    dispatch(changeFilters({ filters: auxFilters }));
+  };
+
+  const handleShowFilters = () => {
+    handleChangeFilters();
+    setShowFilters(true);
+  };
+
   return (
     <Navbar collapseOnSelect expand="lg">
-      <Container fluid={true} className="px-0 px-md-3">
+      <Container fluid={true} className="px-0 px-md-2">
         <Navbar.Brand href="/">
           <h1>Tecnical Movie</h1>
         </Navbar.Brand>
@@ -24,15 +49,9 @@ const Header = ({ type, setSearchWord, setShowFilters }) => {
           className="justify-content-end"
         >
           <Nav>
-            <Nav.Link as={Link} to="sectionHeader">
-              Top puntuación
-            </Nav.Link>
-            <Nav.Link as={Link} to="sectionBasicInformation">
-              Proximamente
-            </Nav.Link>
-            <Nav.Link as={Link} to="sectionBenefits">
-              Populares
-            </Nav.Link>
+            <Nav.Link>Top puntuación</Nav.Link>
+            <Nav.Link>Proximamente</Nav.Link>
+            <Nav.Link>Populares</Nav.Link>
           </Nav>
           {type === "home" && (
             <Form className="d-none d-lg-flex">
@@ -46,28 +65,23 @@ const Header = ({ type, setSearchWord, setShowFilters }) => {
                   setAuxSearchWord(e.target.value);
                 }}
               />
-              <Button
-                variant="outline-success"
-                onClick={() => {
-                  setSearchWord(auxSearchWord);
-                }}
-              >
+              <Button variant="outline-success" onClick={handleChangeFilters}>
                 Buscar
               </Button>
-              <Button
-                variant="outline-success"
-                className="mx-2"
-                onClick={() => {
-                  setShowFilters(true);
-                }}
-              >
-                <div className="d-flex align-items-center">
-                  <BsFilterRight />
-                  <div>
-                    <p className="mx-2 my-0">filtrar</p>
+              {auxSearchWord.length > 0 && (
+                <Button
+                  variant="outline-success"
+                  className="mx-2"
+                  onClick={handleShowFilters}
+                >
+                  <div className="d-flex align-items-center">
+                    <BsFilterRight className="d-none d-lg-flex" />
+                    <div>
+                      <p className="mx-2 my-0">filtrar</p>
+                    </div>
                   </div>
-                </div>
-              </Button>
+                </Button>
+              )}
             </Form>
           )}
         </Navbar.Collapse>
