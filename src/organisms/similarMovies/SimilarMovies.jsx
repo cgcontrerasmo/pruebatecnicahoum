@@ -12,17 +12,15 @@ const SimilarMovies = ({ movieId }) => {
   }, [movieId]);
 
   return (
-    <Container>
-      <Row className="d-flex justify-content-center">
-        {similarMovies.map((similarMovie) => {
-          return (
-            <Col className="col-2 mx-2 px-0" key={similarMovie.id}>
-              <CardMovie movie={similarMovie} />
-            </Col>
-          );
-        })}
-      </Row>
-    </Container>
+    <Row className="d-flex justify-content-center">
+      {similarMovies.map((similarMovie) => {
+        return (
+          <Col className="mx-2 px-0" xs={12} md={2} key={similarMovie.id}>
+            <CardMovie movie={similarMovie} />
+          </Col>
+        );
+      })}
+    </Row>
   );
 };
 
