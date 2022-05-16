@@ -1,10 +1,12 @@
 import Modal from "react-bootstrap/Modal";
-import { Row, Button, Form } from "react-bootstrap";
-import "./Filters.scss";
+import { Row } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeFilters } from "../../store/filters/actions";
 import { getCountries, getLanguages } from "../../utilities/moviesServices";
+import "./Filters.scss";
 
 const Filters = ({ showModal, setShowModal }) => {
   const dispatch = useDispatch();
@@ -34,7 +36,7 @@ const Filters = ({ showModal, setShowModal }) => {
   };
 
   return (
-    <Modal show={showModal}>
+    <Modal show={showModal} className="Filters">
       <Modal.Header closeButton onHide={() => setShowModal(false)}>
         <Modal.Title>
           Aplica filtros para encontrar las películas que estás buscando

@@ -1,12 +1,13 @@
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
 import { useParams } from "react-router-dom";
 import Header from "../../atoms/header/Header";
-import "./DetailMovie.scss";
 import { useEffect, useState } from "react";
 import { getMovieDetails } from "../../utilities/moviesServices";
 import SimilarMovies from "../../organisms/similarMovies/SimilarMovies";
 import Chip from "../../atoms/chip/Chip";
 import ModalLoading from "../../atoms/modalLoading/ModalLoading";
+import "./DetailMovie.scss";
 
 const DetailMovie = () => {
   const imageRoute = "https://image.tmdb.org/t/p/w500";

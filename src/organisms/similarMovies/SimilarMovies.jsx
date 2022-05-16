@@ -1,8 +1,7 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import CardMovie from "../../atoms/cardMovie/CardMovie";
 import { getSimilarMovies } from "../../utilities/moviesServices";
-import "./SimilarMovies.scss";
 
 const SimilarMovies = ({ movieId }) => {
   const [similarMovies, setSimilarMovies] = useState([]);

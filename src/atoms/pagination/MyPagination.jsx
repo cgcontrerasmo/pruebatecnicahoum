@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Pagination } from "react-bootstrap";
-import "./MyPagination.scss";
+import Pagination from "react-bootstrap/Pagination";
 
 const MyPagination = ({ setterPage, pages, page }) => {
   const [items, setItems] = useState([]);
@@ -26,6 +25,7 @@ const MyPagination = ({ setterPage, pages, page }) => {
       );
     }
     setItems(auxItems);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, pages]);
 
   return (

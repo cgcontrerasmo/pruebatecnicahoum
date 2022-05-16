@@ -1,5 +1,5 @@
 import Modal from "react-bootstrap/Modal";
-import { Row, Spinner } from "react-bootstrap";
+import Spinner from "react-bootstrap/Spinner";
 import "./ModalLoading.scss";
 
 const ModalLoading = ({ showModal }) => {

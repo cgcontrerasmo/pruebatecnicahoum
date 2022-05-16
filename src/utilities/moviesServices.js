@@ -3,12 +3,32 @@ const BASE_URL = "https://api.themoviedb.org/3/movie/";
 const API_KEY = "048606db50f52287d36a510eab6b20ca";
 const BASE_URL_SEARCH = "https://api.themoviedb.org/3/search/movie";
 const BASE_URL_CONFIG = "https://api.themoviedb.org/3/configuration/";
-export const getPopularMovies = (setterMovies, page, setterLoading) => {
+
+export const getPopularMovies = (
+  setterMovies,
+  page,
+  setterLoading,
+  setterPages
+) => {
   axios
     .get(`${BASE_URL}popular?api_key=${API_KEY}&page=${page}`)
     .then((res) => {
       if (res.status === 200) {
         setterMovies(res.data.results);
+        setterPages(res.data.total_pages);
+        setterLoading(false);
+      }
+    })
+    .catch((error) => {});
+};
+
+export const getUpcoming = (setterMovies, page, setterLoading, setterPages) => {
+  axios
+    .get(`${BASE_URL}upcoming?api_key=${API_KEY}&page=${page}`)
+    .then((res) => {
+      if (res.status === 200) {
+        setterMovies(res.data.results);
+        setterPages(res.data.total_pages);
         setterLoading(false);
       }
     })

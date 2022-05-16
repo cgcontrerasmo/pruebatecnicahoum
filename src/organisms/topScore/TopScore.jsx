@@ -6,10 +6,14 @@ import ModalLoading from "../../atoms/modalLoading/ModalLoading";
 import MyPagination from "../../atoms/pagination/MyPagination";
 import ShowFiltersApply from "../../molecules/showFiltersApply/ShowFiltersApply";
 import BasicLayout from "../../templates/basicLayout/BacisLayout";
-import { getTopScore, getMoviesSearch } from "../../utilities/moviesServices";
-import "./TopScore.scss";
+import {
+  getTopScore,
+  getMoviesSearch,
+  getPopularMovies,
+  getUpcoming,
+} from "../../utilities/moviesServices";
 
-const TopScore = () => {
+const TopScore = ({ selectedMovies }) => {
   const filters = useSelector((state) => state.filters);
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,10 +24,14 @@ const TopScore = () => {
     window.scrollTo(0, 0);
     if (filters.filters.searchWord !== "") {
       getMoviesSearch(setMovies, page, setLoading, setPages, filters.filters);
-    } else {
+    } else if (selectedMovies === "top_score") {
       getTopScore(setMovies, page, setLoading, setPages);
+    } else if (selectedMovies === "upcoming") {
+      getUpcoming(setMovies, page, setLoading, setPages);
+    } else if (selectedMovies === "popular") {
+      getPopularMovies(setMovies, page, setLoading, setPages);
     }
-  }, [page, filters]);
+  }, [page, filters, selectedMovies]);
 
   return (
     <>

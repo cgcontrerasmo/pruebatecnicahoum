@@ -1,7 +1,21 @@
 .Chip {
   padding: 0px 12px;
-  background-color: #607d8b;
+  background-color: #eceff1;
   border-radius: 6px;
   width: fit-content;
   margin: 0px 5px;
+  color: #607d8b;
+}
+
+.Chipfilter {
+  color: #ff452b;
+  border-radius: 6px;
+  margin: 0 8px 8px 0px;
+  padding: 0px 10px;
+  font-size: 1rem;
+  background-color: rgba(255, 69, 43, 0.1);
+  width: fit-content;
+  .close {
+    color: rgba(255, 69, 43, 0.15);
+  }
 }

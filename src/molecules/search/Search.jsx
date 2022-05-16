@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import { Form, FormControl, Button, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { BsFilterRight, BsSearch } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { changeFilters } from "../../store/filters/actions";
+import FormControl from "react-bootstrap/FormControl";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const Search = ({ setShowFilters }) => {
   const [auxSearchWord, setAuxSearchWord] = useState("");
@@ -22,7 +25,7 @@ const Search = ({ setShowFilters }) => {
   return (
     <Form>
       <Row>
-        <Col xs={8}>
+        <Col xs={7}>
           <FormControl
             type="search"
             placeholder="Buscar"
@@ -34,14 +37,14 @@ const Search = ({ setShowFilters }) => {
             }}
           />
         </Col>
-        <Col xs={1}>
+        <Col xs={2}>
           <Button variant="outline-success" onClick={handleChangeFilters}>
             <BsSearch />
             <div className="d-none d-lg-flex">Buscar</div>
           </Button>
         </Col>
         {auxSearchWord.length > 0 && (
-          <Col xs={1}>
+          <Col xs={2}>
             <Button
               variant="outline-success"
               className="mx-2"
