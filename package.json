@@ -1,5 +1,5 @@
 {
-  "homepage": "https://cgcontrerasmo.github.io/pruebatecnicahoum/",
+  "homepage": "/pruebatecnicahoum",
   "name": "pruebatecnicahoum",
   "version": "0.1.0",
   "private": true,
@@ -30,7 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build - r https://$GH_TOKEN@github.com/cgcontrerasmo/pruebatecnicahoum"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
