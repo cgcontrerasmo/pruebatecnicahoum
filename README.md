@@ -1,3 +1,30 @@
+# Decisiones técnicas y explicación de la implementación
+
+## Explicación de la implementación
+
+El proyecto se encarga de mostrar un listado de películas, las cuales tienen tres grandes clasificaciones, top puntuación, próximamente y populares, la información de cada una de estas
+clasificaciones son extraídas del api publica "The Movie Database API" (https://developers.themoviedb.org/3/movies). También es posible buscar películas por nombre, y aplicar filtros de región de disponibilidad, leguaje y si es apta para menos de edad o no, esta funcionalidad es llamada filtrado, pero es necesario realizar una aclaración respecto a este punto; esto se hará más adelante. La aplicación también da la posibilidad de ver el detalle de una película haciendo clic sobre las cartas que aparecen al inicio en el home. Una vez en el detalle de cada película se verá información como fecha de lanzamiento, el puntaje que tiene y por cuantas personas fue dado, descripción, etiquetas y cinco películas relacionadas, de las cuales también es posible acceder a su detalle dando clic sobre dicha tarjeta.
+
+También se implementó una paginación en el home, y el diseño completo de la aplicación es responsive, también se implementaron pantallas de carga para evitar el incorrecto renderizado de la información por la demora en las peticiones.
+
+Todos los componentes están implementados con Hooks.
+
+### Filtros
+
+Se realizó una implementación de los filtros, pero por temas de la API utilizada estos solo están disponibles si se realiza una búsqueda por palabra clave primero. Por lo anterior, es necesario escribir en la barra de búsqueda, cuando se escribe al menos un carácter aparece el botón de filtrado. Una vez se le da clic en el botón de filtrar, se realiza la búsqueda por los caracteres escritos en la barra y se activa un modal en el cual aparecen los filtros posibles para aplicar: región, lenguaje y si es apta o no para menos de edad.
+
+Como la información de los filtros está compartida entre varios componentes se optó por implementarla en redux, esto con el fin de no intercambiar información entre estos componentes por medio de props. Una vez se aplican los filtros, aparece el resultado de la búsqueda en la página de inicio junto con algunas etiquetas para cada filtro aplicado. Estas etiquetas son posibles de eliminar y la búsqueda se actualizará.
+
+Como el filtrado está estrechamente relacionado con la busqueda, al borrar los filtros se borrará también la palabra escrita en la barra de busqueda.
+
+### Imagenes por defecto
+
+Como es posible que algunas de las url de imagenes que envía el API no estén disponibles se realizó la implementación de imagenes por defecto que aparecerán cuando esto ocurra.
+
+### Navigation
+
+Para realizar la navegación a lo largo de la aplicación se utilizó enrutado dinámico mediante navigator de react-router-dom.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
