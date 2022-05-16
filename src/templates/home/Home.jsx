@@ -4,7 +4,6 @@ import Search from "../../molecules/search/Search";
 import TopScore from "../../organisms/topScore/TopScore";
 import { useState } from "react";
 import Filters from "../../molecules/filters/Filters";
-import "./Home.scss";
 
 const Home = () => {
   const [showFilters, setShowFilters] = useState(false);
