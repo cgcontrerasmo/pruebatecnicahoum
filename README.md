@@ -7,7 +7,7 @@ clasificaciones son extraídas del api publica "The Movie Database API" (https:/
 
 También se implementó una paginación en el home, y el diseño completo de la aplicación es responsive, también se implementaron pantallas de carga para evitar el incorrecto renderizado de la información por la demora en las peticiones.
 
-Todos los componentes están implementados con Hooks.
+Todos los componentes son componentes funcionales.
 
 ### Filtros
 
